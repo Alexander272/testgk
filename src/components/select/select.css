@@ -1,0 +1,66 @@
+.select {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.select__title {
+    font-size: 1.3rem;
+}
+
+.select__container {
+    width: 100%;
+    position: relative;
+}
+
+.select__selected {
+    border-bottom: 1px solid #07f;
+    padding: 3px 7px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.select__selected:hover {
+    color: #07f;
+}
+
+.select__icon {
+    transform: rotate(90deg);
+}
+
+.select__options {
+    position: absolute;
+    top: 34px;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 4px 3px 20px #3535358c;
+    transition: max-height 0.4s ease-in-out;
+}
+.select__options.select__options--open {
+    max-height: 500px;
+    overflow: auto;
+}
+.select__option {
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+    padding: 5px 7px;
+}
+.select__option--selected {
+    background-color: #3d87ef;
+    color: #fff;
+}
+.select__option:nth-child(even) {
+    background-color: #41414118;
+}
+.select__option:hover {
+    background-color: #3d87ef;
+    color: #fff;
+}
