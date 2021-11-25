@@ -130,6 +130,7 @@ select {
 
 .select__icon {
     transform: rotate(90deg);
+    pointer-events: none;
 }
 
 .select__options {
@@ -149,6 +150,10 @@ select {
     max-height: 500px;
     overflow: auto;
 }
+.select__options.select__options--open > .select__icon {
+    transform: rotate(270deg);
+}
+
 .select__option {
     cursor: pointer;
     background-color: transparent;
@@ -283,13 +288,15 @@ select {
 .button__text {
     position: relative;
     z-index: 5;
+    pointer-events: none;
 }
 
-.filed {
+.field {
     margin-top: 15px;
     border: 1px solid #3d87ef;
     border-radius: 16px;
     padding: 7px 15px;
-    min-height: 70px;
+    height: 100px;
     width: 100%;
+    overflow-y: auto;
 }

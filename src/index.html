@@ -10,7 +10,13 @@
         <div class="wrapper">
             <main id="main" class="main">
                 <div class="row">
-                    <input class="checkbox" id="director" type="checkbox" />
+                    <input
+                        class="checkbox"
+                        id="director"
+                        data-id="10"
+                        type="checkbox"
+                        checked="true"
+                    />
                     <label class="checkbox__label" for="director">
                         <span>
                             <svg width="12px" height="10px">
@@ -19,7 +25,13 @@
                         </span>
                         <span>Директор</span></label
                     >
-                    <input class="checkbox" id="engineer" type="checkbox" />
+                    <input
+                        class="checkbox"
+                        id="engineer"
+                        data-id="20"
+                        type="checkbox"
+                        checked="true"
+                    />
                     <label class="checkbox__label" for="engineer">
                         <span>
                             <svg width="12px" height="10px">
@@ -28,7 +40,13 @@
                         </span>
                         <span>Инженер</span>
                     </label>
-                    <input class="checkbox" id="manager" type="checkbox" />
+                    <input
+                        class="checkbox"
+                        id="manager"
+                        data-id="30"
+                        type="checkbox"
+                        checked="true"
+                    />
                     <label class="checkbox__label" for="manager">
                         <span>
                             <svg width="12px" height="10px">
@@ -45,23 +63,43 @@
                     </svg>
                 </div>
                 <div class="row">
-                    <div id="organization" class="col"></div>
-                    <div id="employee" class="col"></div>
+                    <div class="col">
+                        <div class="select">
+                            <p class="select__title">Организация</p>
+                            <div class="select__container">
+                                <p id="organization" class="select__selected">
+                                    Выберите организацию <span class="select__icon">&#9658;</span>
+                                </p>
+                                <ul id="organization_options" class="select__options"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="select">
+                            <p class="select__title">Сотрудник</p>
+                            <div class="select__container">
+                                <p id="employee" class="select__selected">
+                                    Выберите сотрудника <span class="select__icon">&#9658;</span>
+                                </p>
+                                <ul id="employee_options" class="select__options"></ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button class="button button--primary">
+                        <button id="add" class="button button--primary">
                             <span class="button__text">Добавить</span>
                         </button>
                     </div>
                     <div class="col">
-                        <button class="button button--danger">
+                        <button id="remove" class="button button--danger">
                             <span class="button__text">Очистить</span>
                         </button>
                     </div>
                 </div>
                 <div class="row">
-                    <div id="#filed" class="filed"></div>
+                    <div id="field" class="field"></div>
                 </div>
             </main>
         </div>
