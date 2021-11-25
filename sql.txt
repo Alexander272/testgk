@@ -1,0 +1,36 @@
+1. написать запрос, который выводит список всех людей с названиями их организаций или с NULL вместо названия организации если для человека не указана организация.
+SELECT person.name, org.name FROM test.tperson AS person LEFT JOIN test.torg AS org ON (person.oid = org.oid);
+
+2. Написать запрос, выводящий список всех  организаций, в которых никто не работает.
+SELECT name, person.count FROM test.torg AS org LEFT JOIN (
+	SELECT oid, count(*) AS count FROM test.tperson WHERE oid IS NOT NULL GROUP BY oid
+) AS person ON (person.oid = org.oid) WHERE person.count IS NULL
+
+3. Написать запрос выводящий список названий всех организаций с количеством трудоустроенных в них людей: 
+    Вар1 – только организации, в которых кто-то есть т.е. 
+    SELECT name, person.count FROM test.torg AS org LEFT JOIN (
+        SELECT oid, count(*) AS count FROM test.tperson WHERE oid IS NOT NULL GROUP BY oid
+    ) AS person ON (person.oid = org.oid) WHERE person.count IS NOT NUL
+
+    Вар2 – полный список
+    SELECT name, person.count FROM test.torg AS org LEFT JOIN (
+        SELECT oid, count(*) AS count FROM test.tperson WHERE oid IS NOT NULL GROUP BY oid
+    ) AS person ON (person.oid = org.oid);
+
+5. Опишите вкратце способ, которым данные из таблицы ниже вы бы загрузили в таблицу tAccountRest. А если бы это был эксель в 50тыс строк?
+Я бы использовал оператор COPY с отключенными индексами у таблицы. Если первый вариант не подходит можно использовать INSERT преварительно отлючив  автофиксацию 
+транзакций или использовать PREPARE.
+
+6. Написать запрос, который вернет «остатки по счетам» т.е  для каждого из счетов выведет его название, дату последнего «движения денег» по счету
+SELECT acc.accnumber, rest.stdate, rest.balance FROM test.taccount AS acc
+INNER JOIN (SELECT rest.aid, rest.stdate, rest.balance
+	FROM test.taccountrest AS rest
+	WHERE NOT EXISTS (
+		SELECT 1 FROM test.taccountrest rest2
+			WHERE rest2.aid = rest.aid AND rest2.stdate > rest.stdate
+	)
+) AS rest ON (acc.aid = rest.aid)
+    
+7. Получить список кредитов, которые на момент расчета имеют непогашенную задолженность, и рассчитать для каждого такого кредита:
+    1. Общую (накопленную) сумму просроченного долга непогашенную (не выплаченную) к моменту расчета.
+    SELECT customer, deal, SUM(sum) FROM test.pdcl GROUP BY customer,deal HAVING SUM(sum)>0
